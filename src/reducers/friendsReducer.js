@@ -7,6 +7,7 @@ import chatsReducer from './chatsReducer'
     friends: [
       {
         'friend1_email': {
+          id:email
           meta:{
             email,
             profilePic,
@@ -17,6 +18,7 @@ import chatsReducer from './chatsReducer'
       },
       {
         'friend2_email': {
+          id:email
           meta:{},
           chats:{}
         }
@@ -37,8 +39,14 @@ const friendsReducer = (state = initialState, action)=> {
               chats: chatsReducer(state[action.payload.email]? state[action.payload.email].chats: {}, action)
             }
         }
-      case 'REMOVE_FRIEND':
+      case 'REMOVE_ALL_FRIENDS':
         return initialState
+      case 'REMOVE_FRIEND': {
+        return {
+          ...state,
+          [action.payload.email]: {}
+        }
+      }
       default:
         return state
     }

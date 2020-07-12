@@ -6,14 +6,15 @@ import {connect} from 'react-redux'
 import SidePanel from './SidePanel'
 import NewMessageForm from './NewMessageForm'
 import MessagesPanel from './MessagesPanel'
-import {setFriend, removeFriend} from '../actions/friendsAction'
+import {setFriend, removeFriend, removeAllFriends} from '../actions/friendsAction'
 
 class App extends Component {
   state = {
     selectedChat : null,
     addNewFriend : false,
     currentUser: this.props.user.user,
-    listeners: []
+    listeners: [],
+    friends: []
   }
 
   updateRead=(friendEmail)=> {
@@ -76,11 +77,14 @@ class App extends Component {
 
   UpdateFriends =(chats) => {
     let {setFriend} = this.props,
-      {currentUser} = this.state
+      {currentUser} = this.state,
+      friend_keys=[]
 
     let friends = chats.map(chat=> {
+      let email = chat.users.filter(user=> user!==currentUser.email)[0]
+      friend_keys.push(email)
       return {
-        email: chat.users.filter(user=> user!==currentUser.email)[0],
+        email,
         messages: chat.messages,
         lastMessageAt: chat.lastMessageAt,
         receiverHasRead: chat.receiverHasRead
@@ -91,17 +95,22 @@ class App extends Component {
       let friendUnsubscribe =
         firebase.firestore().collection('users').where('email', '==', friend.email)
         .onSnapshot(res => {
-          if(res.docs[0])
-          friend['meta'] = {
-            email: friend.email,
-            profilePhoto: res.docs[0].data().profilePhoto,
-            displayName: res.docs[0].data().displayName
+          if(res.docs[0]) {
+            friend['meta'] = {
+              email: friend.email,
+              profilePhoto: res.docs[0].data().profilePhoto,
+              displayName: res.docs[0].data().displayName
+            }
+            
+            setFriend(friend)
+            this.setState({
+              friends: friend_keys,
+              listeners: this.state.listeners.concat(friendUnsubscribe)
+            })
+          } else {
+            this.setState({friends: friend_keys})
+            removeFriend(friend.email)
           }
-          
-          setFriend(friend)
-          this.setState({
-            listeners: this.state.listeners.concat(friendUnsubscribe)
-          })
         })
     })
   }
@@ -113,7 +122,7 @@ class App extends Component {
       addNewFriend : false,
       listeners: []
     })
-    this.props.removeFriend()
+    this.props.removeAllFriends()
   }
 
   componentDidMount() {
@@ -202,7 +211,8 @@ class App extends Component {
           <Grid.Row>
             <Grid.Column width={4}>
               <SidePanel 
-                user={this.state.currentUser} 
+                user={this.state.currentUser}
+                keys={this.state.friends} 
                 friends={this.props.friends}
                 selectedChat={this.state.selectedChat}
                 onSelectChat={this.onSelectChat}
@@ -240,4 +250,4 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return state
 }
-export default connect(mapStateToProps, {setFriend, removeFriend})(App);
+export default connect(mapStateToProps, {setFriend, removeFriend, removeAllFriends})(App);

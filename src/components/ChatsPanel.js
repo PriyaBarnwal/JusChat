@@ -10,10 +10,11 @@ class ChatsPanel extends React.Component {
   }
 
   render() {
-    let {friends, selectedChat} = this.props
+    let {friends, selectedChat, keys} = this.props
     let friend_keys = Object.keys(friends)
+    keys = (friend_keys.length > keys.length)? keys: friend_keys
     
-    friend_keys = friend_keys.sort((a,b)=>{
+    friend_keys = keys.sort((a,b)=>{
       return (friends[a].chats.lastMessageAt>friends[b].chats.lastMessageAt) ? -1: 1
     })
     return (
@@ -21,7 +22,7 @@ class ChatsPanel extends React.Component {
       (
         <List relaxed divided>
           {friend_keys.map((key, index)=>{
-            return (
+            return (friends[key].id) ? (
               <div key ={index} className={selectedChat === key ? 'selected': ''}>
                 <div className="chat-item" onClick={()=>this.props.onSelectChat(key)}>
                   <img className='chat-icon' alt ='chat icon' src={friends[key].meta.profilepic || defaultPic} />
@@ -42,7 +43,7 @@ class ChatsPanel extends React.Component {
                 </div>
                 <Divider style={{margin:0}}/>
               </div>
-            ) 
+            ) : null
           })} 
         </List>
       ): null
