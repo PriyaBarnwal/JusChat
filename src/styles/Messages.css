@@ -1,0 +1,49 @@
+.my-msg {
+    display:flex;
+    justify-content: right;
+    float: right;
+    clear: both;
+    max-width: 50%;
+}
+.friend-msg .message-text{
+    color: white;
+    border: 1px solid grey;
+    border-radius: 14px 14px 14px 0;
+    background: #009999;
+}
+.friend-msg {
+    float: left;
+    clear: both;
+    display: flex;
+    justify-content: left;
+    max-width: 50%;
+}
+.my-msg .message-text{
+    color: white;
+    border: 1px solid grey;
+    border-radius: 14px 14px 0 14px;
+    background: darkslategrey;
+}
+.my-msg .message-time {
+    float: right
+}
+
+.friend--msg .message-time {
+    float: left
+}
+
+.icon {
+    border-radius: 100%;
+    width: 48px;
+    height: 48px;
+    margin-right: 5px;
+}
+.message-time {
+    font-size: 0.8rem;
+    color: lightgray;
+}
+.message-text {
+    padding: 9px 14px;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}

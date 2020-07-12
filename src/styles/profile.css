@@ -1,0 +1,15 @@
+.ui.modal>.bg-profile {
+    background-color: darkslategrey !important;
+}
+
+.image-holder > img{
+    width: 250px !important;
+    height:250px !important;
+    object-fit: cover;
+}
+
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

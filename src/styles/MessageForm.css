@@ -1,0 +1,22 @@
+.message-input {
+    width: 68%;
+    margin-right: 15px;
+    border-radius: 500rem;
+}
+.emoji-mart{
+    position: absolute;
+    bottom: 5rem;
+}
+.icon.message-icon {
+    font-size: 1.3rem;
+}
+.ui.segment.raised {
+    flex-direction: row;
+    width: 100%;
+    position: fixed  !important;
+    bottom: 0.5rem;
+}
+.previewImage {
+    border: 1px solid white;
+    border-radius: 100;
+}

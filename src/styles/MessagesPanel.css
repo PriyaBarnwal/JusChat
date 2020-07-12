@@ -1,0 +1,29 @@
+.message-panel {
+    background-color: #101010;
+    margin-left: -15px;
+}
+
+.ui.segment.chat-box {
+    margin: 0;
+    height: 85vh;
+    overflow-y: scroll;
+    background-image: url('../assets/e62925d2af795db245dffbc42e05296b.jpg');
+    background-repeat: repeat-x; 
+    background-position: center center;
+}
+
+.empty-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    flex-direction: column;
+    min-height: 80%;
+}
+
+.messages-header {
+    padding: 20px 10px !important;
+    margin: 0 !important;
+    display: flex;
+    justify-content: space-between;
+}

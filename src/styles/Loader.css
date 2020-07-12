@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    align-items: center;
+    background-color: black;
+    opacity: 0.9
+}
+
+.transparent-container {
+    display: flex;
+    opacity: 0.7;
+    justify-content: center;
+    align-items: center;
+}
