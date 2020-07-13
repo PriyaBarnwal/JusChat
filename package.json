@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "dotenv": "^8.2.0",
     "emoji-mart": "^2.6.1",
     "firebase": "^7.15.5",
+    "firebase-tools": "^8.5.0",
     "jquery": "^3.5.1",
     "md5": "^2.2.1",
     "mime-types": "^2.1.20",
@@ -26,7 +28,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "clean": "rm -rf ./public/bundle.* ./src/firebase-config.json",
+    "build": "npm run clean && npm run createfirebaseconf && react-scripts build",
+    "createfirebaseconf": "firebase apps:sdkconfig --json > ./src/firebase-config.json",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }

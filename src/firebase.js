@@ -3,7 +3,7 @@ import 'firebase/storage'
 import 'firebase/auth'
 import 'firebase/firestore'
 
-//copy your own firebase config when you create your application here
+const firebaseConfig = require('./firebase-config.json').result.sdkConfig;
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig)
