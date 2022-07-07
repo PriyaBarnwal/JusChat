@@ -10,7 +10,7 @@
     "jquery": "^3.5.1",
     "md5": "^2.2.1",
     "mime-types": "^2.1.20",
-    "moment": "^2.22.2",
+    "moment": "^2.29.4",
     "react": "^16.4.1",
     "react-avatar-editor": "^11.0.4",
     "react-click-outside": "github:tj/react-click-outside",
